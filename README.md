@@ -2,6 +2,9 @@
 -  Created using create react app
 -  Tailwind CSS for designs
 -  React router dom for routing
+-  Login/Sign Up Form
+      -  form validation
+      -  useRef
 
 # Features
 - Homepage 

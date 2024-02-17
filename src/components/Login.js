@@ -1,11 +1,35 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import { checkLoginData, checkSignUpData } from "../utils/validate";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
+  const fullRef = useRef(null);
+  const [errorMsg, setErrorMsg] = useState(null);
   function changeFormType() {
     setIsSignUp(!isSignUp);
+    setErrorMsg(null);
   }
+
+  //using useRef to get instance of input boxes to get data from inputs (instead of state variables)
+
+  function handleClickSubmit() {
+    // remove existing error messages
+    setErrorMsg(null);
+    //ref.current have reference to input boxes --> input.value is that value
+    const fullName = fullRef?.current?.value;
+    const email = emailRef?.current?.value;
+    const password = passRef?.current?.value;
+    //validate form
+    if (isSignUp) {
+      setErrorMsg(checkSignUpData(fullName, email, password));
+    } else {
+      setErrorMsg(checkLoginData(email, password));
+    }
+  }
+
   return (
     <div className="bg-black h-screen">
       <Header></Header>
@@ -16,28 +40,40 @@ const Login = () => {
           alt="bg-img"
         ></img>
 
-        <form className="p-12 absolute bg-black bg-opacity-85 z-10 my-44 mx-auto left-0 right-0 w-[30%] rounded">
+        <form
+          className="p-12 absolute bg-black bg-opacity-85 z-10 my-44 mx-auto left-0 right-0 w-[30%] rounded"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <h1 className="text-3xl text-white mb-3">
             {isSignUp ? "Sign Up" : "Sign In"}
           </h1>
           {isSignUp && (
             <input
+              ref={fullRef}
               type="text"
               placeholder="Enter Full Name"
               className="w-full mb-3 outline-none bg-slate-500 p-2 rounded text-white"
             ></input>
           )}
           <input
+            ref={emailRef}
             type="email"
             placeholder="Enter email or phone number"
             className="w-full mb-3 outline-none bg-slate-500 p-2 rounded text-white"
           ></input>
           <input
+            ref={passRef}
             type="password"
             placeholder="Password"
             className="w-full mb-3 outline-none bg-slate-500 p-2 rounded text-white"
           ></input>
-          <button className="w-full text-white bg-red-600 rounded-sm p-2 mt-3">
+          {errorMsg && <p className="mb-2 text-xs text-red-700">{errorMsg}</p>}
+          <button
+            className="w-full text-white bg-red-600 rounded-sm p-2 mt-3"
+            onClick={handleClickSubmit}
+          >
             {isSignUp ? "Sign Up" : "Sign In"}
           </button>
           <div className="mt-1">
@@ -46,7 +82,7 @@ const Login = () => {
               className="outline-none mr-1"
               name="remember-me"
             ></input>
-            <label for="remember-me" className="text-gray-600">
+            <label htmlFor="remember-me" className="text-gray-600">
               Remember me
             </label>
           </div>
