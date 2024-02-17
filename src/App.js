@@ -1,8 +1,23 @@
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login";
+import Browse from "./components/Browse";
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login></Login>,
+  },
+  {
+    path: "/browse",
+    element: <Browse />,
+  },
+]);
 
 function App() {
   return (
-    <div className='text-xl'> HII</div>
+    <div>
+      <RouterProvider router={appRouter}></RouterProvider>
+    </div>
   );
 }
 
