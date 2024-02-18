@@ -3,9 +3,29 @@
 -  Tailwind CSS for designs
 -  React router dom for routing
 -  Login/Sign Up Form
-      -  form validation
+      -  form validation - can use formik
       -  useRef
-
+   - To get form data of input fields : 1. can use state variables, 2. use reference to the input boxes:
+      ``` const email = useRef(); <input ref={email} ....>; const email = email?.current?.value; ```
+- Firebase as backend for authentication & hosting: 
+  - webproject
+      - create firebase config and install firebase ``` npm i firebase ```
+      - allows hosting as well
+  - Enable authentication; 
+    - multiple methods of authentication using firebase: email/password, google login, facebook
+  - To deploy to firebase:
+    - ``` npm i -g firebase-tools ```
+    - ``` firebase login ```
+    - ``` firebase init ``` --> choose hosting options and build directory (dist in parcel, build in cra)
+    - ``` firebase deploy``` --> hit after build (``` npm run build ```)
+- Hosted URL: https://netflix-gpt-80c4b.web.app
+- SignIn (create account) and LogIn with email/password using Firebase Auth
+- Redux for central store
+  - userSlice for login user
+  
+- onAuthStateChange --> common Firebase method (event listener) called whenever user logsin / out, signs in or out -> can be done once on App root
+- useNavigate() from react router dom: used to redirect programmatically, (or we can use window.location.href (bad))
+  - ``` const navigate = useNavigate(); navigate('/browse')```
 # Features
 - Homepage 
    - Toolbar with login/signup

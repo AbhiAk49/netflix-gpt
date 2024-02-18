@@ -1,8 +1,19 @@
 import { useRef, useState } from "react";
-import Header from "./Header";
 import { checkLoginData, checkSignUpData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase.config";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import { addUser } from "../utils/store/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -11,6 +22,16 @@ const Login = () => {
   function changeFormType() {
     setIsSignUp(!isSignUp);
     setErrorMsg(null);
+    // clear form
+    if (emailRef?.current?.value) {
+      emailRef.current.value = null;
+    }
+    if (passRef?.current?.value) {
+      passRef.current.value = null;
+    }
+    if (fullRef?.current?.value) {
+      fullRef.current.value = null;
+    }
   }
 
   //using useRef to get instance of input boxes to get data from inputs (instead of state variables)
@@ -22,11 +43,66 @@ const Login = () => {
     const fullName = fullRef?.current?.value;
     const email = emailRef?.current?.value;
     const password = passRef?.current?.value;
+    let errorMsg = null;
     //validate form
     if (isSignUp) {
-      setErrorMsg(checkSignUpData(fullName, email, password));
+      errorMsg = checkSignUpData(fullName, email, password);
     } else {
-      setErrorMsg(checkLoginData(email, password));
+      errorMsg = checkLoginData(email, password);
+    }
+    setErrorMsg(errorMsg);
+    if (errorMsg) return;
+    // no message, login/signup
+    if (isSignUp) {
+      // create account logic
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          // Signed up
+          //updateProfile with name
+          updateProfile(auth.currentUser, {
+            displayName: fullName,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              const user = auth.currentUser;
+              navigate("/browse");
+              dispatch(
+                addUser({
+                  user_id: user.uid,
+                  email: user.email,
+                  display_name: user.displayName,
+                  phone: user.phoneNumber,
+                  photo: user.photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.error("create user error", error);
+              setErrorMsg(`${errorCode} - ` + errorMessage);
+            });
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error("create user error", error);
+          setErrorMsg(`${errorCode} - ` + errorMessage);
+        });
+    } else {
+      // login logic
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          // Signed in
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error("login user error", error);
+          setErrorMsg(`${errorCode} - ` + errorMessage);
+        });
     }
   }
 

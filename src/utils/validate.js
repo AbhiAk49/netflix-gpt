@@ -1,4 +1,6 @@
 export const checkLoginData = (email, password) => {
+  if (!email || email.length === 0) return "Email is required";
+  if (!password || password.length === 0) return "Password is required";
   const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
   const isPasswordValid =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
