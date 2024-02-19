@@ -13,6 +13,12 @@ export const TMDB_API_OPTIONS = {
 };
 
 export const TMDB_NOW_PLAYING_API =
-  "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+  "https://api.themoviedb.org/3/movie/now_playing?language=en-IN&page=1";
 
 export const TMDB_IMG_BASE_URL = "https://image.tmdb.org/t/p/original/";
+
+export const TMDB_MOVIE_VIDEO_BY_ID = (movie_id) =>
+  `https://api.themoviedb.org/3/movie/${movie_id}/videos?language=en-US`;
+
+export const YOUTUBE_EMBEDED_URL = (key) =>
+  `https://www.youtube.com/embed/${key}?si=tgLAtnPLe7B7wYZw`;

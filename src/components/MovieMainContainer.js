@@ -4,13 +4,12 @@ import VideoPlayingInBg from "./VideoPlayingInBg";
 import { useSelector } from "react-redux";
 const MovieMainContainer = () => {
   const nowPlayingMovies = useSelector((store) => store.movies.nowPlaying);
-  console.log("nowPlayingMovies", nowPlayingMovies);
   const mainMovie = nowPlayingMovies.length && nowPlayingMovies[0];
   return (
-    <div className="mt-20">
+    <div className="mt-0">
       {mainMovie ? (
         <div>
-          <VideoPlayingInBg></VideoPlayingInBg>
+          <VideoPlayingInBg movieId={mainMovie.id}></VideoPlayingInBg>
           <VideoInfo
             title={mainMovie.title}
             overview={mainMovie.overview}
