@@ -6,23 +6,21 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/store/userSlice";
 import { useDispatch } from "react-redux";
+import { APP_LOGO } from "../utils/constants";
 const Header = () => {
   const navigate = useNavigate();
   const signOutUser = () => {
-    signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("sign out error", error);
-        //navigate to error page
-      });
+    signOut(auth).catch((error) => {
+      console.error("sign out error", error);
+      //navigate to error page
+    });
   };
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [showDropDownMenu, setShowDropDownMenu] = useState(false);
   useEffect(() => {
-    const event = onAuthStateChanged(auth, (user) => {
+    //https://firebase.google.com/docs/reference/js/v8/firebase.auth.Auth#returns-firebase.unsubscribe
+    const unsubsribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
@@ -41,17 +39,14 @@ const Header = () => {
         navigate("/");
       }
     });
-    // return () => {
-    //   event();
-    // };
+    return () => {
+      unsubsribe();
+    };
   }, []);
   return (
-    <div className="absolute w-full bg-gradient-to-b from-black to-transparent z-10 flex justify-between items-center">
+    <div className="absolute w-full bg-gradient-to-b from-black to-transparent z-10 flex justify-between items-center top-0">
       <div className="w-48">
-        <img
-          src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt="logo"
-        ></img>
+        <img src={APP_LOGO} alt="logo"></img>
       </div>
       {user && (
         <div className="flex items-center relative mr-4">

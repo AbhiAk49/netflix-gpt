@@ -6,13 +6,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase.config";
-import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { addUser } from "../utils/store/userSlice";
 import { useDispatch } from "react-redux";
+import { BG_IMAGE } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const emailRef = useRef(null);
@@ -61,11 +60,10 @@ const Login = () => {
           //updateProfile with name
           updateProfile(auth.currentUser, {
             displayName: fullName,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            //photoURL: "",
           })
             .then(() => {
               const user = auth.currentUser;
-              navigate("/browse");
               dispatch(
                 addUser({
                   user_id: user.uid,
@@ -82,7 +80,6 @@ const Login = () => {
               console.error("create user error", error);
               setErrorMsg(`${errorCode} - ` + errorMessage);
             });
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -92,17 +89,12 @@ const Login = () => {
         });
     } else {
       // login logic
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          // Signed in
-          navigate("/browse");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error("login user error", error);
-          setErrorMsg(`${errorCode} - ` + errorMessage);
-        });
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error("login user error", error);
+        setErrorMsg(`${errorCode} - ` + errorMessage);
+      });
     }
   }
 
@@ -110,11 +102,7 @@ const Login = () => {
     <div className="bg-black h-screen">
       <Header></Header>
       <div>
-        <img
-          className="absolute"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="bg-img"
-        ></img>
+        <img className="absolute" src={BG_IMAGE} alt="bg-img"></img>
 
         <form
           className="p-12 absolute bg-black bg-opacity-85 z-10 my-44 mx-auto left-0 right-0 w-[30%] rounded"

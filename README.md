@@ -26,6 +26,12 @@
 - onAuthStateChange --> common Firebase method (event listener) called whenever user logsin / out, signs in or out -> can be done once on App root
 - useNavigate() from react router dom: used to redirect programmatically, (or we can use window.location.href (bad))
   - ``` const navigate = useNavigate(); navigate('/browse')```
+- Bug Fix : Moved all the navigate logic to a component which is always there and under router provider, i.e. in React => solving bug of login/logged user
+- Unsubsribed to onAuthStateChanged in useEffect
+
+- TMDB APIs for movies data
+  - Now playing movies API
+  - 
 # Features
 - Homepage 
    - Toolbar with login/signup
