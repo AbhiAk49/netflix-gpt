@@ -5,7 +5,7 @@ import MovieSecondaryContainer from "./MovieSecondaryContainer";
 const Browse = () => {
   useNowPlayingMovies();
   return (
-    <div>
+    <div className="bg-black">
       <Header></Header>
       {/**
        *
