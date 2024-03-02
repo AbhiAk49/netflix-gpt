@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import useFetchMovieTrailer from "../hooks/useFetchMovieTrailer";
 import VideoPlayer from "./VideoPlayer";
 import { useEffect, useRef } from "react";
+import ShimmerMain from "./ShimmerMain";
 
 const VideoPlayingInBg = ({ movieId, muteProps }) => {
   const [muted, setIsMuted] = muteProps;
@@ -23,6 +24,7 @@ const VideoPlayingInBg = ({ movieId, muteProps }) => {
     playerRef.current = player;
     player.on("ready", () => {
       setIsMuted(false);
+      player.volume(0.01);
     });
 
     player.on("dispose", () => {});
@@ -35,16 +37,10 @@ const VideoPlayingInBg = ({ movieId, muteProps }) => {
     }
   }, [muted]);
 
-  // const muteToggle = () => {
-  //   const vp = playerRef.current.player();
-  //   vp.muted(!muted);
-  //   setIsMuted(!muted);
-  // };
-
   return (
     <div>
       <div className="w-screen">
-        {playingTrailer && (
+        {playingTrailer ? (
           <VideoPlayer
             options={{
               ...videoJsOptions,
@@ -57,6 +53,8 @@ const VideoPlayingInBg = ({ movieId, muteProps }) => {
             }}
             onReady={handlePlayerReady}
           ></VideoPlayer>
+        ) : (
+          <ShimmerMain></ShimmerMain>
         )}
       </div>
     </div>
