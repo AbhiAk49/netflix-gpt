@@ -21,7 +21,7 @@ export const TMDB_MOVIE_VIDEO_BY_ID = (movie_id) =>
   `https://api.themoviedb.org/3/movie/${movie_id}/videos?language=${TMDB_LANG}`;
 
 export const YOUTUBE_EMBEDED_URL = (key) =>
-  `https://www.youtube.com/embed/${key}?si=tgLAtnPLe7B7wYZw&autoplay=1&mute=1&controls=0&loop=1`;
+  `https://www.youtube.com/embed/${key}?si=brulDUDRhMwa-S7d&autoplay=1&mute=1&controls=0&loop=1&cc_load_policy=1&show_info=0`;
 
 export const TMDB_TOP_RATED_MOVIES = `https://api.themoviedb.org/3/movie/top_rated?language=${TMDB_LANG}&page=1`;
 
