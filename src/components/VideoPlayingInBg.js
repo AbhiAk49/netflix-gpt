@@ -20,14 +20,20 @@ const VideoPlayingInBg = ({ movieId, muteProps }) => {
     preload: true,
   };
 
-  const handlePlayerReady = (player, arg) => {
+  const handlePlayerReady = (player) => {
     playerRef.current = player;
     player.on("ready", () => {
       setIsMuted(false);
       player.volume(0.01);
     });
 
-    player.on("dispose", () => {});
+    player.on("dispose", () => {
+    });
+
+    player.on('play',() => {
+      setIsMuted(false);
+      player.volume(0.01);
+    })
   };
 
   useEffect(() => {
@@ -35,13 +41,14 @@ const VideoPlayingInBg = ({ movieId, muteProps }) => {
       const vp = playerRef.current.player();
       vp.muted(!muted);
     }
-  }, [muted]);
+  }, [muted, movieId]);
 
   return (
     <div>
       <div className="w-screen">
         {playingTrailer ? (
           <VideoPlayer
+            className="w-screen h-screen aspect-video"
             options={{
               ...videoJsOptions,
               sources: [

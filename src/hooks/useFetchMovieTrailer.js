@@ -18,13 +18,13 @@ const useFetchMovieTrailer = (movieId) => {
       }
       dispatch(addTrailerVideo(mainTrailer));
     } catch (error) {
-      console.error(`Error from getNowPlayingMovies: ${error}`);
+      console.error(`Error from useFetchMovieTrailer: ${error}`);
     }
   };
   useEffect(() => {
     //fetch videos with movie Id
     fetchMovieVideos();
-  }, []);
+  }, [movieId]);
 };
 
 export default useFetchMovieTrailer;

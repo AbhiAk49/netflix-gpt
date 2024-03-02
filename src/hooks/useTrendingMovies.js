@@ -11,7 +11,7 @@ const useTrendingMovies = () => {
       const data = await response.json();
       dispatch(addTrendingMovies(data.results));
     } catch (error) {
-      console.error(`Error from getNowPlayingMovies: ${error}`);
+      console.error(`Error from getTrendingMovies: ${error}`);
     }
   };
   useEffect(() => {

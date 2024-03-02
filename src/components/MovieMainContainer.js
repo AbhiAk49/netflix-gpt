@@ -4,12 +4,11 @@ import VideoPlayingInBg from "./VideoPlayingInBg";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 const MovieMainContainer = () => {
-  const nowPlayingMovies = useSelector((store) => store.movies.nowPlaying);
-  const mainMovie = nowPlayingMovies.length && nowPlayingMovies[0];
+  const mainMovie = useSelector((store) => store.movies.currentlySelected);
   const [muted, setMuted] = useState(null);
   return (
     <div className="mt-0">
-      {mainMovie ? (
+      {mainMovie && mainMovie.id ? (
         <div>
           <VideoPlayingInBg
             movieId={mainMovie.id}

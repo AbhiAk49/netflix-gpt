@@ -1,9 +1,15 @@
 import { TMDB_IMG_BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addCurrentlySelected } from "../utils/store/movieSlice";
 
 const MovieCard = ({ info }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(addCurrentlySelected(info));
+  };
   const { title, poster_path } = info;
   return (
-    <div className="hover:shadow-lg transition-transform hover:translate-y-[-30px]">
+    <div className="hover:shadow-lg transition-transform hover:translate-y-[-30px]" onClick={handleClick}>
       {poster_path && (
         <div className="min-w-44 min-h-[20rem] flex">
           <img

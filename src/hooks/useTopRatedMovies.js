@@ -11,7 +11,7 @@ const useTopRatedMovies = () => {
       const data = await response.json();
       dispatch(addTopRatedMovies(data.results));
     } catch (error) {
-      console.error(`Error from getNowPlayingMovies: ${error}`);
+      console.error(`Error from getTopRatedMovies: ${error}`);
     }
   };
   useEffect(() => {

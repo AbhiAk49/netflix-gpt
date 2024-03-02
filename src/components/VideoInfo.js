@@ -23,7 +23,7 @@ const VideoInfo = ({ title, overview, poster, muteProps }) => {
           </h4>
         )}
         {overview && (
-          <p className="mt-6 text-lg font-medium leading-6 text-white w-1/2">
+          <p className="mt-6 text-lg font-medium leading-6 text-white w-1/2 max-h-[6rem] text-ellipsis overflow-hidden align-vertical-text-4">
             {overview}
           </p>
         )}
@@ -38,7 +38,7 @@ const VideoInfo = ({ title, overview, poster, muteProps }) => {
           </div>
           {muted !== null && (
             <button
-              className="bg-black shadow shadow-slate-900 rounded opacity-90 text-white p-2 px-3 hover:shadow-lg hover:shadow-slate-800 hover:opacity-100 m-2 mt-4 translate-y-[165px] -translate-x-[3.25rem]"
+              className="bg-black shadow shadow-slate-900 rounded opacity-90 text-white p-2 px-3 hover:shadow-lg hover:shadow-slate-800 hover:opacity-100 m-2 mt-4 translate-y-[165px] -translate-x-[3.25rem] z-30"
               onClick={handleMuteToggle}
             >
               {!muted ? (
