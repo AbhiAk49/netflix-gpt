@@ -6,6 +6,11 @@ const MovieCard = ({ info }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(addCurrentlySelected(info));
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
   const { title, poster_path } = info;
   return (
