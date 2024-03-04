@@ -1,25 +1,10 @@
 import Header from "./Header";
-import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
-import MovieMainContainer from "./MovieMainContainer";
-import MovieSecondaryContainer from "./MovieSecondaryContainer";
+import { Outlet } from "react-router-dom";
 const Browse = () => {
-  useNowPlayingMovies();
   return (
     <div className="bg-black">
       <Header></Header>
-      {/**
-       *
-       * MovieMainContainer
-       *  - VideoPlayingInBg
-       *  - Video Title&Description
-       *
-       * MovieSecondaryContainer
-       *  - MoviesList * n
-       *    - MoviesList:
-       *      - MovieCard * m
-       */}
-      <MovieMainContainer />
-      <MovieSecondaryContainer />
+      <Outlet />
     </div>
   );
 };

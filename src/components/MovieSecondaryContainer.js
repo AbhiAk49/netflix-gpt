@@ -19,7 +19,7 @@ const MovieSecondaryContainer = () => {
     { title: "Trending Movies this week", cards: trendingMovies },
   ];
   return (
-    <div className="text-white -mt-[5.5rem] relative z-10 pb-5">
+    <div className="text-white -mt-[10.5rem] relative z-10 pb-5">
       {/***
        * MovieList Component - horizontal scrollable
        *  - List of movie cards * n

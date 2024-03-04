@@ -52,6 +52,6 @@
     - Movies Suggestions
       - Movies Lists * N num of genres/categories
 
-- Netflix GPT
+- Netflix GPT -- accessible via header seach icon
    - Search Bar
    - Movie suggestions
