@@ -35,7 +35,7 @@ const Header = () => {
           photo: user.photoURL,
         })
       );
-      navigate(existingPath);
+      navigate(existingPath === '/' ? '/browse': existingPath);
     } else {
       dispatch(removeUser());
       navigate("/");
