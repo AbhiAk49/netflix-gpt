@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "netflix-gpt-80c4b"
-  }
+  },
+  "targets": {
+    "netflix-gpt-80c4b": {
+      "hosting": {
+        "netflix-gpt-new": [
+          "netflix-gpt-8321b"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "build",
+    "target": "netflix-gpt-new",
     "ignore": [
       "firebase.json",
       "**/.*",
