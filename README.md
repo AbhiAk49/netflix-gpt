@@ -56,3 +56,7 @@
 - Netflix GPT -- accessible via header seach icon
    - Search Bar
    - Movie suggestions
+
+- Future Features:
+  - Multi language support
+  - 

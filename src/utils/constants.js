@@ -4,14 +4,6 @@ export const APP_LOGO =
 export const BG_IMAGE =
   "https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_large.jpg";
 
-export const TMDB_API_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNmY3N2RmNzljOGUzYjgwMzRlNDBhYmY1NGFmNGViMiIsInN1YiI6IjY1ZDMyMGQyOGRlMGFlMDE3Y2Q4ZmIwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1_Z-59gYIX3CwB_l3j837EbmWRwaTJWrE5xQqLMT2ok",
-  },
-};
 
 export const TMDB_NOW_PLAYING_API = `https://api.themoviedb.org/3/movie/now_playing`;
 
@@ -28,3 +20,18 @@ export const TMDB_TOP_RATED_MOVIES = `https://api.themoviedb.org/3/movie/top_rat
 export const TMDB_POPULAR_MOVIES = `https://api.themoviedb.org/3/movie/popular?language=${TMDB_LANG}&page=1`;
 
 export const TMDB_TRENDING_WK_MOVIES = `https://api.themoviedb.org/3/trending/movie/week?language=${TMDB_LANG}`;
+
+//remove these --> move to env only
+export const OPEN_AI_KEY = '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';
+
+//remove these --> move to env only
+export const TMDB_API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNmY3N2RmNzljOGUzYjgwMzRlNDBhYmY1NGFmNGViMiIsInN1YiI6IjY1ZDMyMGQyOGRlMGFlMDE3Y2Q4ZmIwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1_Z-59gYIX3CwB_l3j837EbmWRwaTJWrE5xQqLMT2ok",
+  },
+};
+
+export const GOOGLE_AI_API_KEY = 'AIzaSyDYGo9kMOm9pTd_xcxJKcQAj4hhEkl48VE';
