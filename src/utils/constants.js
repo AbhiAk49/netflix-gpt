@@ -4,7 +4,6 @@ export const APP_LOGO =
 export const BG_IMAGE =
   "https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_large.jpg";
 
-
 export const TMDB_NOW_PLAYING_API = `https://api.themoviedb.org/3/movie/now_playing`;
 
 export const TMDB_IMG_BASE_URL = "https://image.tmdb.org/t/p/original/";
@@ -22,7 +21,7 @@ export const TMDB_POPULAR_MOVIES = `https://api.themoviedb.org/3/movie/popular?l
 export const TMDB_TRENDING_WK_MOVIES = `https://api.themoviedb.org/3/trending/movie/week?language=${TMDB_LANG}`;
 
 //remove these --> move to env only
-export const OPEN_AI_KEY = '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';
+export const OPEN_AI_KEY = "";
 
 //remove these --> move to env only
 export const TMDB_API_OPTIONS = {
@@ -34,4 +33,5 @@ export const TMDB_API_OPTIONS = {
   },
 };
 
-export const GOOGLE_AI_API_KEY = 'AIzaSyDYGo9kMOm9pTd_xcxJKcQAj4hhEkl48VE';
+//remove these --> move to env only
+export const GOOGLE_AI_API_KEY = "";
