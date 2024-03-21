@@ -36,4 +36,4 @@ export const TMDB_API_OPTIONS = {
 };
 
 //remove these --> move to env only
-export const GOOGLE_AI_API_KEY = "AIzaSyDE17lQc3rU6HICLihgWqmD_6qIObZWQcY";
+export const GOOGLE_AI_API_KEY = "";
