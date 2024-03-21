@@ -3,8 +3,9 @@ const ShimmerCardsSmall = ({ num = 5 }) => {
   for (let i = 1; i <= num; i++) {
     cards.push(
       <div
-        className="bg-slate-800 min-w-72 min-h-72 p-4 rounded-lg opacity-70 mx-auto
+        className="bg-slate-800 min-h-72 min-w-56 p-4 rounded-lg opacity-70 mx-auto
       "
+        key={`loader-card-${i}`}
       ></div>
     );
   }

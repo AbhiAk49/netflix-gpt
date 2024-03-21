@@ -20,6 +20,8 @@ export const TMDB_POPULAR_MOVIES = `https://api.themoviedb.org/3/movie/popular?l
 
 export const TMDB_TRENDING_WK_MOVIES = `https://api.themoviedb.org/3/trending/movie/week?language=${TMDB_LANG}`;
 
+export const TMDB_MOVIE_SEARCH = (query) => `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`;
+
 //remove these --> move to env only
 export const OPEN_AI_KEY = "";
 
@@ -34,4 +36,4 @@ export const TMDB_API_OPTIONS = {
 };
 
 //remove these --> move to env only
-export const GOOGLE_AI_API_KEY = "";
+export const GOOGLE_AI_API_KEY = "AIzaSyDE17lQc3rU6HICLihgWqmD_6qIObZWQcY";

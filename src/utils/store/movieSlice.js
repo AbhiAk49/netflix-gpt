@@ -8,6 +8,8 @@ const movieSlice = createSlice({
     popular: [],
     topRated: [],
     trending: [],
+    searchResults: [],
+    searchForString: null
   },
   reducers: {
     addCurrentlySelected: (state, action) => {
@@ -28,6 +30,15 @@ const movieSlice = createSlice({
     addTrendingMovies: (state, action) => {
       state.trending.push(...action.payload);
     },
+    populateSearchedMovies: (state, action) => {
+      state.searchResults.push(...action.payload);
+    },
+    clearSearchedMovies: (state) => {
+      state.searchResults = [];
+    },
+    setSearchForString: (state, action) => {
+      state.searchForString = action.payload;
+    }
   },
 });
 
@@ -38,5 +49,8 @@ export const {
   addTopRatedMovies,
   addTrendingMovies,
   addCurrentlySelected,
+  populateSearchedMovies,
+  clearSearchedMovies,
+  setSearchForString
 } = movieSlice.actions;
 export default movieSlice.reducer;

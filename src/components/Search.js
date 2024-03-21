@@ -1,11 +1,25 @@
 import { useRef, useState } from "react";
-import openai from "../utils/openai.config";
+// import openai from "../utils/openai.config";
 import bard from "../utils/googleai.config";
-import { GOOGLE_AI_API_KEY } from "../utils/constants";
+import {
+  GOOGLE_AI_API_KEY,
+  TMDB_API_OPTIONS,
+  TMDB_MOVIE_SEARCH,
+} from "../utils/constants";
 import ShimmerCardsSmall from "./ShimmerCardsSmall";
+import { useDispatch } from "react-redux";
+import {
+  populateSearchedMovies,
+  clearSearchedMovies,
+  setSearchForString,
+} from "../utils/store/movieSlice";
+import MovieSearchSuggestions from "./MovieSearchSuggestions";
 
 const Search = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [aiAssist, setAiAssist] = useState(true);
   const searchInputRef = useRef(null);
   const onSubmit = (event) => {
     event.preventDefault();
@@ -14,7 +28,6 @@ const Search = () => {
   async function searchInAiQuery() {
     try {
       const searchText = searchInputRef?.current?.value;
-      console.log("searchInAiQuery, searchText", searchText);
       const gptQuery = `Act as a movie recommendation system, give results as movie suggestions for the query: ${searchText}. Only give max 5 movie names in a comma seperated manner. Also remove the year in parenthesis from names. Example results: Movie Name 1, Movie Name 2, Movie Name 3, Movie Name 4, Movie Name 5`;
 
       // const results = await openai.chat.completions.create({
@@ -31,11 +44,57 @@ const Search = () => {
     }
   }
 
+  async function searchMovieTMDB(string) {
+    try {
+      const response = await fetch(TMDB_MOVIE_SEARCH(string), TMDB_API_OPTIONS);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(`Error from searchMovieTMDB: ${error}`);
+      return null;
+    }
+  }
+
+  const handleCheckboxChange = () => {
+    setAiAssist(!aiAssist);
+  };
+
   const handleSearchText = async () => {
+    if (searchInputRef?.current?.value?.length < 1) return;
+    dispatch(clearSearchedMovies());
+    dispatch(setSearchForString(null));
     // search in tmdb or in AI search
     setIsLoading(true);
-    const aiResults = await searchInAiQuery();
-    console.log("aiResults", aiResults);
+    setShowResults(true);
+    if (!aiAssist) {
+      const tmdbMovies = await searchMovieTMDB(
+        searchInputRef?.current?.value
+      );
+      dispatch(setSearchForString(searchInputRef?.current?.value));
+      dispatch(populateSearchedMovies(tmdbMovies.results));
+    } else {
+      const aiResults = await searchInAiQuery();
+      const aiMoivesList = aiResults.split(", ");
+      const tmdbResults = await Promise.all(
+        aiMoivesList.map((movie) => searchMovieTMDB(movie))
+      );
+      const searchedMoviesFound = [];
+      tmdbResults.forEach((res) => {
+        if (res.results?.length) {
+          if (res.results.length > 3) {
+            let filteredRes = [];
+            if (!filteredRes.length) {
+              filteredRes = [res.results[0]];
+            }
+            searchedMoviesFound.push(...filteredRes);
+          } else {
+            searchedMoviesFound.push(...res.results);
+          }
+        }
+      });
+      dispatch(setSearchForString(searchInputRef?.current?.value));
+      dispatch(populateSearchedMovies(searchedMoviesFound));
+    }
     setIsLoading(false);
   };
 
@@ -53,13 +112,31 @@ const Search = () => {
           ref={searchInputRef}
         ></input>
         <button
-          className="text-white bg-black rounded-sm p-2 shadow shadow-slate-900"
+          className="rounded p-2 shadow text-white bg-red-600 disabled:bg-slate-700"
           onClick={handleSearchText}
         >
           Search
         </button>
+
+        <label htmlFor="toggle" className="flex items-center cursor-pointer">
+          <span className="text-white m-2">
+            AI Assist : {aiAssist ? "ON" : "OFF"}
+          </span>
+          <input
+            type="checkbox"
+            checked={aiAssist}
+            onChange={handleCheckboxChange}
+            id="toggle"
+            className="sr-only peer"
+          />
+          <div className="block relative bg-gray-100 w-16 h-9 p-1 rounded-full before:absolute before:bg-red-900 before:w-7 before:h-7 before:p-1 before:rounded-full before:transition-all before:duration-500 before:left-1 peer-checked:before:left-8 peer-checked:before:bg-red-600"></div>
+        </label>
       </form>
-      {isLoading ? <ShimmerCardsSmall num={5}/> : ""}
+      {isLoading ? (
+        <ShimmerCardsSmall num={5} />
+      ) : (
+        <MovieSearchSuggestions forceShow={showResults} />
+      )}
     </div>
   );
 };

@@ -9,19 +9,23 @@ const MovieCard = ({ info }) => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
   const { title, poster_path } = info;
   return (
-    <div className="hover:shadow-lg transition-transform hover:translate-y-[-30px]" onClick={handleClick}>
+    <div
+      onClick={handleClick}
+    >
       {poster_path && (
-        <div className="min-w-44 min-h-[20rem] flex">
-          <img
-            className="w-full object-scale-down aspect-auto rounded"
-            src={TMDB_IMG_BASE_URL + poster_path}
-            alt={title + "poster"}
-          ></img>
+        <div className="min-w-48 flex rounded max-h-80">
+          {poster_path && (
+            <img
+              className="w-full object-cover aspect-auto rounded h-80"
+              src={TMDB_IMG_BASE_URL + poster_path}
+              alt={title + "poster"}
+            ></img>
+          )}
         </div>
       )}
     </div>
