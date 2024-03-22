@@ -23,6 +23,7 @@
 - SignIn (create account) and LogIn with email/password using Firebase Auth
 - Redux for central store
   - userSlice for login user
+- Netlify hosted also
   
 - onAuthStateChange --> common Firebase method (event listener) called whenever user logsin / out, signs in or out -> can be done once on App root
 - useNavigate() from react router dom: used to redirect programmatically, (or we can use window.location.href (bad))

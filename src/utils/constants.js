@@ -23,7 +23,7 @@ export const TMDB_TRENDING_WK_MOVIES = `https://api.themoviedb.org/3/trending/mo
 export const TMDB_MOVIE_SEARCH = (query) => `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`;
 
 //remove these --> move to env only
-export const OPEN_AI_KEY = "";
+export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
 
 //remove these --> move to env only
 export const TMDB_API_OPTIONS = {
@@ -31,9 +31,9 @@ export const TMDB_API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNmY3N2RmNzljOGUzYjgwMzRlNDBhYmY1NGFmNGViMiIsInN1YiI6IjY1ZDMyMGQyOGRlMGFlMDE3Y2Q4ZmIwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1_Z-59gYIX3CwB_l3j837EbmWRwaTJWrE5xQqLMT2ok",
+      "Bearer " + process.env.REACT_APP_TMBD_TOKEN,
   },
 };
 
 //remove these --> move to env only
-export const GOOGLE_AI_API_KEY = "";
+export const GOOGLE_AI_API_KEY = process.env.REACT_APP_GOOGLE_AI_API_KEY;

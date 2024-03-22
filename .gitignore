@@ -24,3 +24,5 @@ yarn-error.log*
 
 # firebase hosting cache
 hosting.*
+
+.env
