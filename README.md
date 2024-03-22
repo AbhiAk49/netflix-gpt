@@ -19,11 +19,11 @@
     - ``` firebase init ``` --> choose hosting options and build directory (dist in parcel, build in cra)
     - ``` firebase deploy``` --> hit after build (``` npm run build ```)
     - ```firebase deploy --only hosting:<FIREBASEAPP_SITE_ID>``` for multiple follow this (https://firebase.google.com/docs/hosting/multisites)
-- Hosted URL: https://netflix-gpt-80c4b.web.app
+- Hosted URL: ```https://netflix-gpt-80c4b.web.app, https://netflix-gpt-8321b.web.app```
 - SignIn (create account) and LogIn with email/password using Firebase Auth
 - Redux for central store
   - userSlice for login user
-- Netlify hosted also
+- Netlify hosted : ```https://netflix-gpt.netlify.app/```
   
 - onAuthStateChange --> common Firebase method (event listener) called whenever user logsin / out, signs in or out -> can be done once on App root
 - useNavigate() from react router dom: used to redirect programmatically, (or we can use window.location.href (bad))

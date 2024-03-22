@@ -20,6 +20,7 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [aiAssist, setAiAssist] = useState(true);
+
   const searchInputRef = useRef(null);
   const onSubmit = (event) => {
     event.preventDefault();
@@ -81,8 +82,9 @@ const Search = () => {
       const searchedMoviesFound = [];
       tmdbResults.forEach((res) => {
         if (res.results?.length) {
-          if (res.results.length > 3) {
+          if (res.results.length > 5) {
             let filteredRes = [];
+            filteredRes = res.results.filter(movie => movie.original_language === 'hi' || movie.original_language === 'en');
             if (!filteredRes.length) {
               filteredRes = [res.results[0]];
             }
@@ -118,9 +120,9 @@ const Search = () => {
           Search
         </button>
 
-        <label htmlFor="toggle" className="flex items-center cursor-pointer">
-          <span className="text-white m-2">
-            AI Assist : {aiAssist ? "ON" : "OFF"}
+        <label htmlFor="toggle" className="flex items-center cursor-pointer bg-black p-2 rounded shadow">
+          <span className="m-1 text-red-500 min-w-28">
+            AI Assist : <span className={`${aiAssist ? 'text-gray-50': 'text-gray-400'}`}>{aiAssist ? "ON" : "OFF"}</span>
           </span>
           <input
             type="checkbox"
@@ -129,7 +131,7 @@ const Search = () => {
             id="toggle"
             className="sr-only peer"
           />
-          <div className="block relative bg-gray-100 w-16 h-9 p-1 rounded-full before:absolute before:bg-red-900 before:w-7 before:h-7 before:p-1 before:rounded-full before:transition-all before:duration-500 before:left-1 peer-checked:before:left-8 peer-checked:before:bg-red-600"></div>
+          <div className="block relative bg-gray-100 w-16 h-9 p-1 rounded-full before:absolute before:bg-gray-900 before:w-7 before:h-7 before:p-1 before:rounded-full before:transition-all before:duration-500 before:left-1 peer-checked:before:left-8 peer-checked:before:bg-red-600"></div>
         </label>
       </form>
       {isLoading ? (

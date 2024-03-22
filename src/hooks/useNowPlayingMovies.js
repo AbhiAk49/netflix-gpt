@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { TMDB_API_OPTIONS, TMDB_NOW_PLAYING_API } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies, addCurrentlySelected } from "../utils/store/movieSlice";
 
 const useNowPlayingMovies = () => {
+  const nowPlayingMovies = useSelector(store => store.movies.nowPlaying);
   const dispatch = useDispatch();
   const getNowPlayingMovies = async () => {
     try {
@@ -20,7 +21,7 @@ const useNowPlayingMovies = () => {
   };
   useEffect(() => {
     // fetching now playing movies
-    getNowPlayingMovies();
+    !nowPlayingMovies.length && getNowPlayingMovies();
   }, []);
 };
 

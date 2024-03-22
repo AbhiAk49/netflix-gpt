@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { TMDB_API_OPTIONS, TMDB_TOP_RATED_MOVIES } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTopRatedMovies } from "../utils/store/movieSlice";
 
 const useTopRatedMovies = () => {
+  const topRatedMovies = useSelector(store => store.movies.topRated); 
   const dispatch = useDispatch();
   const getTopRatedMovies = async () => {
     try {
@@ -15,7 +16,7 @@ const useTopRatedMovies = () => {
     }
   };
   useEffect(() => {
-    getTopRatedMovies();
+    !topRatedMovies.length && getTopRatedMovies();
   }, []);
 };
 
