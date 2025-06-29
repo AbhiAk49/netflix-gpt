@@ -140,7 +140,7 @@ const Login = () => {
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </button>
-          <div className="mt-1">
+          {/* <div className="mt-1">
             <input
               type="checkbox"
               className="outline-none mr-1"
@@ -149,7 +149,7 @@ const Login = () => {
             <label htmlFor="remember-me" className="text-gray-600">
               Remember me
             </label>
-          </div>
+          </div> */}
           <div className="text-white text-xs mt-1">
             <p>
               {isSignUp ? "Already have Netflix GPT ?" : "New to Netflix GPT?"}
