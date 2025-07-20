@@ -1,7 +1,8 @@
 export const TMDB_LANG = "en-IN";
 export const DEF_TMDB_PATH = "https://api.themoviedb.org";
-export const PROXY_TMDB_PATH = "https://tmdb-proxy-netfli.netlify.app/";
-export const BASE_TMDB_PATH = DEF_TMDB_PATH;
+export const USE_PROXY = process.env.REACT_APP_USE_PROXY;
+export const PROXY_TMDB_PATH = process.env.REACT_APP_PROXY_PATH;
+export const BASE_TMDB_PATH = USE_PROXY ? PROXY_TMDB_PATH : DEF_TMDB_PATH;
 export const APP_LOGO =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 export const APP_LOGO_MINI = 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2023.ico';
