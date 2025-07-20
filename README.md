@@ -19,7 +19,7 @@
     - ``` firebase init ``` --> choose hosting options and build directory (dist in parcel, build in cra)
     - ``` firebase deploy``` --> hit after build (``` npm run build ```)
     - ```firebase deploy --only hosting:<FIREBASEAPP_SITE_ID>``` for multiple follow this (https://firebase.google.com/docs/hosting/multisites)
-- Hosted URL: ```https://netflix-gpt-80c4b.web.app, https://netflix-gpt-8321b.web.app```
+- Hosted URL: ```https://netflix-gpt-80c4b.web.app, https://netflix-gpt-8321b.web.app, https://netf-gpt.netlify.app```
 - SignIn (create account) and LogIn with email/password using Firebase Auth
 - Redux for central store
   - userSlice for login user
