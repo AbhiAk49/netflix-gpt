@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 // import openai from "../utils/openai.config";
-import bard from "../utils/googleai.config";
+import ai from "../utils/googleai.config";
 import {
   GOOGLE_AI_API_KEY,
   TMDB_API_OPTIONS,
@@ -36,9 +36,12 @@ const Search = () => {
       //   model: "gpt-3.5-turbo",
       // });
       // return results?.choices;
-      await bard.initializeChat(GOOGLE_AI_API_KEY);
-      const results = await bard.getBardResponse(gptQuery);
-      return results?.text;
+      const results = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: gptQuery
+      });
+
+      return results?.candidates[0]?.content?.parts[0]?.text;
     } catch (err) {
       console.error("searchGPTQuery error:", err);
       return null;
@@ -75,7 +78,7 @@ const Search = () => {
       dispatch(populateSearchedMovies(tmdbMovies.results));
     } else {
       const aiResults = await searchInAiQuery();
-      const aiMoivesList = aiResults.split(", ");
+      const aiMoivesList = aiResults ? aiResults.split(", ") : [];
       const tmdbResults = await Promise.all(
         aiMoivesList.map((movie) => searchMovieTMDB(movie))
       );

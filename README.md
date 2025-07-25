@@ -57,7 +57,7 @@
 - Netflix GPT -- accessible via header seach icon
    - Search Bar
    - Movie suggestions
-     - bard integration
+     - gemini integration
      - open ai (removed due to credits)
 
 - Future Features:

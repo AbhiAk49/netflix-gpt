@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google/genai": "^1.11.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "bard-api-node": "^2.0.0",
     "firebase": "^10.8.0",
     "lodash": "^4.17.21",
     "openai": "^4.28.4",
